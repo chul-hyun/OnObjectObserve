@@ -45,6 +45,8 @@
             
                 <li data-name="OnObjectObserve#_ee"><a href="OnObjectObserve.html#_ee">_ee</a></li>
             
+                <li data-name="OnObjectObserve#_observer"><a href="OnObjectObserve.html#_observer">_observer</a></li>
+            
             </ul>
             <ul class="typedefs itemMembers">
             
@@ -53,11 +55,9 @@
             
             <span class="subtitle">Methods</span>
             
-                <li data-name="OnObjectObserve.deliverChangeRecords"><a href="OnObjectObserve.html#deliverChangeRecords">deliverChangeRecords</a></li>
-            
-                <li data-name="OnObjectObserve#_observer"><a href="OnObjectObserve.html#_observer">_observer</a></li>
-            
                 <li data-name="OnObjectObserve#deliverChangeRecords"><a href="OnObjectObserve.html#deliverChangeRecords">deliverChangeRecords</a></li>
+            
+                <li data-name="OnObjectObserve#off"><a href="OnObjectObserve.html#off">off</a></li>
             
                 <li data-name="OnObjectObserve#on"><a href="OnObjectObserve.html#on">on</a></li>
             
@@ -270,6 +270,51 @@
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="_observer"><span class="type-signature ">private</span>_observer<span class="type-signature type function">function</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>observer</p>
+    </div>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
         </dl>
     
     
@@ -282,155 +327,12 @@
     <div class="nameContainer">
         <h4 class="name" id="deliverChangeRecords">
             
-            <span class="type-signature static">static</span>OnObjectObserve.deliverChangeRecords<span class="signature">()</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="index.js.html">index.js</a>, <a href="index.js.html#line41">line 41</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>excute Object.deliverChangeRecords(...)</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="_observer">
-            
-            <span class="type-signature ">private</span>_observer<span class="signature">()</span>
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="index.js.html">index.js</a>, <a href="index.js.html#line61">line 61</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>observer ( Object.observe(o, this._observer) )
-excute emit('change', changes)</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="deliverChangeRecords">
-            
             deliverChangeRecords<span class="signature">()</span>
         </h4>
     
         
         <div class="tag-source">
-            <a href="index.js.html">index.js</a>, <a href="index.js.html#line42">line 42</a>
+            <a href="index.js.html">index.js</a>, <a href="index.js.html#line51">line 51</a>
         </div>
         
     </div>
@@ -487,6 +389,141 @@ excute emit('change', changes)</p>
     
     
     
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var o = { a: 'a' }
+var ooo = new OnObjectObserve(o);
+ooo.on(function(){
+    console.log('change!!');
+});
+ooo.on(function(changes){
+    console.log(JSON.stringify(changes));
+});
+o.a = 'b';
+ooo.deliverChangeRecords();
+console.log('set b')
+// return
+// [{&quot;type&quot;:&quot;update&quot;,&quot;object&quot;:{&quot;a&quot;:&quot;b&quot;},&quot;name&quot;:&quot;a&quot;,&quot;oldValue&quot;:&quot;a&quot;}]
+// change!!
+// set b</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="off">
+            
+            off<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="index.js.html">index.js</a>, <a href="index.js.html#line98">line 98</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>off</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Examples</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var o = { a: 'a' }
+var ooo = new OnObjectObserve(o);
+ooo.on(function(){
+    console.log('change!!');
+});
+ooo.on(function(changes){
+    console.log(JSON.stringify(changes));
+});
+o.a = 'b';
+ooo.deliverChangeRecords();
+ooo.off();
+o.a = 'c';
+// return
+// [{&quot;type&quot;:&quot;update&quot;,&quot;object&quot;:{&quot;a&quot;:&quot;b&quot;},&quot;name&quot;:&quot;a&quot;,&quot;oldValue&quot;:&quot;a&quot;}]
+// change!!</p></code></pre>
+    
+
+
+    
+    <pre class="prettyprint"><code><p>var o = { a: 'a' }
+var ooo = new OnObjectObserve(o);
+ooo.on(function(){
+    console.log('change!!');
+});
+ooo.on(function(changes){
+    console.log(JSON.stringify(changes));
+});
+o.a = 'b';
+ooo.deliverChangeRecords();
+o.a = 'c';
+// return
+// [{&quot;type&quot;:&quot;update&quot;,&quot;object&quot;:{&quot;a&quot;:&quot;b&quot;},&quot;name&quot;:&quot;a&quot;,&quot;oldValue&quot;:&quot;a&quot;}]
+// change!!
+// [{&quot;type&quot;:&quot;update&quot;,&quot;object&quot;:{&quot;a&quot;:&quot;c&quot;},&quot;name&quot;:&quot;a&quot;,&quot;oldValue&quot;:&quot;b&quot;}]
+// change!!</p></code></pre>
+    
+
     
 </dd>
 
@@ -501,7 +538,7 @@ excute emit('change', changes)</p>
     
         
         <div class="tag-source">
-            <a href="index.js.html">index.js</a>, <a href="index.js.html#line53">line 53</a>
+            <a href="index.js.html">index.js</a>, <a href="index.js.html#line75">line 75</a>
         </div>
         
     </div>
@@ -559,6 +596,27 @@ excute emit('change', changes)</p>
     
     
     
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var o = { a: 'a' }
+var ooo = new OnObjectObserve(o);
+ooo.on(function(){
+    console.log('change!!');
+});
+ooo.on(function(changes){
+    console.log(JSON.stringify(changes));
+});
+o.a = 'b';
+console.log('set b')
+// return
+// set b
+// [{&quot;type&quot;:&quot;update&quot;,&quot;object&quot;:{&quot;a&quot;:&quot;b&quot;},&quot;name&quot;:&quot;a&quot;,&quot;oldValue&quot;:&quot;a&quot;}]
+// change!!</p></code></pre>
+    
+
+    
 </dd>
 
         </dl>
@@ -578,7 +636,7 @@ excute emit('change', changes)</p>
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Dec 02 2014 05:52:50 GMT+0900 (KST)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Tue Dec 02 2014 06:46:50 GMT+0900 (KST)
         </footer>
     </div>
 </div>

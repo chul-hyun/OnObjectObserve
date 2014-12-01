@@ -1,4 +1,4 @@
-# OnObjectObserve 0.0.0
+# OnObjectObserve 0.0.1
 Object.observe + EventEmitter
 
 ## Loading the script

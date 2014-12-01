@@ -5,6 +5,12 @@
  * @return {OnObjectObserve}
  */
 function OnObjectObserve(o){
+	var self = this;
+	var _observer = function(changes){
+		self._ee.emit.call(self._ee, 'change', changes);
+	}
+	Object.observe(o, _observer);
+
 	/**
 	 * EventEmitter object
 	 * @private
@@ -12,42 +18,105 @@ function OnObjectObserve(o){
 	 */
 	this._ee = new EventEmitter();
 
-	Object.observe(o, this._observer);
+	/**
+	 * observer
+	 * @private
+	 * @type {function}
+	 */
+	this._observer = _observer;
 }
 
-OnObjectObserve.deliverChangeRecords = deliverChangeRecords;
 OnObjectObserve.prototype = {
 	deliverChangeRecords 	: deliverChangeRecords,
-	_observer 				: _observer,
-	on 						: on
+	on 						: on,
+	off 						: off
 }
 
-/**
- * excute Object.deliverChangeRecords(...)
- * @method OnObjectObserve.deliverChangeRecords
- */
 /**
  * excute Object.deliverChangeRecords(...)
  * @method OnObjectObserve.prototype.deliverChangeRecords
+* @example
+* var o = { a: 'a' }
+* var ooo = new OnObjectObserve(o);
+* ooo.on(function(){
+* 	console.log('change!!');
+* });
+* ooo.on(function(changes){
+* 	console.log(JSON.stringify(changes));
+* });
+* o.a = 'b';
+* ooo.deliverChangeRecords();
+* console.log('set b')
+* // return
+* // [{"type":"update","object":{"a":"b"},"name":"a","oldValue":"a"}]
+* // change!!
+* // set b
  */
 function deliverChangeRecords(){
-	Object.deliverChangeRecords(OnObjectObserve.prototype._observer);
+	Object.deliverChangeRecords(this._observer);
 }
 
 /**
  * on
  * @method OnObjectObserve.prototype.on
+* @example
+* var o = { a: 'a' }
+* var ooo = new OnObjectObserve(o);
+* ooo.on(function(){
+* 	console.log('change!!');
+* });
+* ooo.on(function(changes){
+* 	console.log(JSON.stringify(changes));
+* });
+* o.a = 'b';
+* console.log('set b')
+* // return
+* // set b
+* // [{"type":"update","object":{"a":"b"},"name":"a","oldValue":"a"}]
+* // change!!
  */
-function on(){
-	this._ee.on.apply(this, arguments);
+function on(callback){
+	this._ee.on.call(this._ee, 'change', callback);
 }
 
 /**
- * observer ( Object.observe(o, this._observer) )
- * excute emit('change', changes)
- * @private
- * @method OnObjectObserve.prototype._observer
+ * off
+ * @method OnObjectObserve.prototype.off
+* @example
+* var o = { a: 'a' }
+* var ooo = new OnObjectObserve(o);
+* ooo.on(function(){
+* 	console.log('change!!');
+* });
+* ooo.on(function(changes){
+* 	console.log(JSON.stringify(changes));
+* });
+* o.a = 'b';
+* ooo.deliverChangeRecords();
+* ooo.off();
+* o.a = 'c';
+* // return
+* // [{"type":"update","object":{"a":"b"},"name":"a","oldValue":"a"}]
+* // change!!
+* @example
+* var o = { a: 'a' }
+* var ooo = new OnObjectObserve(o);
+* ooo.on(function(){
+* 	console.log('change!!');
+* });
+* ooo.on(function(changes){
+* 	console.log(JSON.stringify(changes));
+* });
+* o.a = 'b';
+* ooo.deliverChangeRecords();
+* o.a = 'c';
+* // return
+* // [{"type":"update","object":{"a":"b"},"name":"a","oldValue":"a"}]
+* // change!!
+* // [{"type":"update","object":{"a":"c"},"name":"a","oldValue":"b"}]
+* // change!!
  */
-function _observer(changes){
-	this._ee.emit('change', changes);
+function off(){
+	this._ee.removeEvent.call(this._ee, 'change');
 }
+
