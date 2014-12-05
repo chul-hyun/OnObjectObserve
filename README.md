@@ -14,7 +14,7 @@ bower install OnObjectObserve
 ````
 
 ### Browser via script tag
-````
+````html
 <script type='text/javascript' src='/assets/js/OnObjectObserve/dist/index.js'></script>
 ````
 
